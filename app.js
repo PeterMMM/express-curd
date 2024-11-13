@@ -6,7 +6,6 @@ var mongoose = require('mongoose');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 
-
 mongoose.connect('mongodb://localhost:27017/lap_juice')
 .then(() => {
   console.log("Database connected.");
@@ -34,6 +33,5 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/juice', juiceRouter);
 app.use('/food', foodRouter);
-
 
 module.exports = app;
