@@ -1,28 +1,41 @@
 var express = require('express');
 var router = express.Router();
+const Juice = require('../models/juiceModel');
 
-var juices = [];
-
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
+  const items = await Juice.find();
   res.status(200);
   res.json({
     message: 'Juice List',
-    result: juices
+    result: items
   })
 });
 
-router.post('/', function(req, res) {
+router.post('/', async function(req, res) {
   const newItem = { id: Date.now(), ...req.body };
-  juices.push(newItem);
-  res.status(201)
-  res.json({
-    message: 'Created juice sucessfully',
-    result: newItem
-  })
+
+  const juice = new Juice(newItem);
+  try {
+    await juice.save();
+
+    res.status(201).json({
+      message: 'Created juice sucessfully.',
+      result: juice
+    })
+  } catch (error) {
+
+    res.status(500).json({
+      message: 'Failed to Created juice.',
+      result: []
+    })
+  }
 })
 
-router.get('/:id', function(req, res) {
-  const item = juices.find(i => i.id === parseInt(req.params.id));
+router.get('/:id', async function(req, res) {
+  const itemId = parseInt(req.params.id);
+  const item = await Juice.findOne({
+    brand_code: itemId
+  });
   if (!item) {
     // To respond not exit
     res.status(400)
@@ -38,38 +51,62 @@ router.get('/:id', function(req, res) {
   })
 })
 
-router.delete('/:id', function(req, res) {
-  const index = juices.findIndex(i => i.id === parseInt(req.params.id));
-  if (index === -1) {
+router.delete('/:id', async function(req, res) {
+
+  const itemId = parseInt(req.params.id);
+
+  try {
+    await Juice.deleteOne({
+      brand_code: itemId
+    });
+    res.status(201);
+    res.json({
+      message: 'Successfully deleted'
+    })
+  } catch (error) {
     res.status(404);
     res.json({
       message: 'Juice not exit!'
     })
   }
-
-  juices.splice(index, 1);
-  res.status(201);
-  res.json({
-    message: 'Successfully deleted'
-  })
 
 })
 
-router.put('/:id', function(req, res) {
-  const item = juices.find(i => i.id === parseInt(req.params.id));
-  if (!item) {
+router.put('/:id', async function(req, res) {
+  const itemId = parseInt(req.params.id);
+
+  try {
+    const item_brand = req.body.brand || item.brand;
+    const item_description = req.body.description || item.description;
+
+    await Juice.findOneAndUpdate(
+      {
+        brand_code: itemId
+      },
+      {
+        $set: {
+          brand: item_brand,
+          description: item_description
+        }
+      }
+    )
+
+    const updatedJuice = await Juice.findOne({
+      brand_code: itemId
+    });
+
+    res.status(201);
+    res.json(({
+      message: "Successfully update juice!",
+      result: updatedJuice
+    }));
+
+  } catch (error) {
     res.status(404);
     res.json({
       message: 'Juice not exit!'
     })
   }
-  item.brand = req.body.brand || item.brand;
-  item.description = req.body.description || item.description;
-  res.status(201);
-  res.json(({
-    message: "Successfully update juice!",
-    result: item
-  }));
 })
 
 
