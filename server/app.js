@@ -5,6 +5,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+const port = 8080;
 
 mongoose.connect('mongodb://localhost:27017/lap_juice')
 .then(() => {
@@ -18,6 +19,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var juiceRouter = require('./routes/juice');
 var foodRouter = require('./routes/food');
+var authRouter = require('./routes/auth');
 
 var app = express();
 
@@ -33,5 +35,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/juice', juiceRouter);
 app.use('/food', foodRouter);
+app.use('/auth', authRouter);
 
+app.listen(port,() => {
+  console.log(`Expess backend app listening on port ${port}`);
+})
 module.exports = app;
