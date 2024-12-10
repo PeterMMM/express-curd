@@ -1,4 +1,19 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
 export default async function Page({ params }) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    // If the user is not logged in, show a login message
+    return (
+      <div>
+        <p className="text-red-600 text-lg font-bold">You need to log in to view the details.</p>
+        <a className="text-sm font-bold" href="/auth/login">Go to Login</a>
+      </div>
+    );
+  }
+
   const slug = (await params).slug;
   const data = await fetch('http://localhost:3000/juice/'+slug);
   const juiceDetail = await data.json();

@@ -23,7 +23,8 @@ var authRouter = require('./routes/auth');
 
 var app = express();
 
-app.use(cors())
+app.use(cors());
+app.use(bodyParser.json());
 
 app.use(logger('dev'));
 app.use(express.json());
