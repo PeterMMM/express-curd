@@ -20,10 +20,11 @@ var usersRouter = require('./routes/users');
 var juiceRouter = require('./routes/juice');
 var foodRouter = require('./routes/food');
 var authRouter = require('./routes/auth');
+var adminRouter = require('./routes/admin');
 
 var app = express();
 
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
 
 app.use(logger('dev'));
@@ -37,6 +38,7 @@ app.use('/users', usersRouter);
 app.use('/juice', juiceRouter);
 app.use('/food', foodRouter);
 app.use('/auth', authRouter);
+app.use('/admin', adminRouter);
 
 app.listen(port,() => {
   console.log(`Expess backend app listening on port ${port}`);

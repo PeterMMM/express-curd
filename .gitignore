@@ -46,3 +46,6 @@ coverage/
 # Windows
 Thumbs.db
 ehthumbs.db
+
+# admin node_modules
+shopadmin/node_modules
