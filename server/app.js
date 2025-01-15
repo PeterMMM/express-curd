@@ -23,6 +23,12 @@ var authRouter = require('./routes/auth');
 var adminRouter = require('./routes/admin');
 
 var app = express();
+const swaggerUi = require('swagger-ui-express');
+const fs = require("fs")
+const YAML = require('yaml')
+
+const file  = fs.readFileSync('./swagger.yaml', 'utf8')
+const swaggerDocument = YAML.parse(file)
 
 app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
@@ -32,6 +38,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
