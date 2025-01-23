@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+
+    <div class="mainContainer w-screen overflow-x-hidden
+    ">
+        <nav class="w-full p-4 flex items-between gap-24  justify-center flex-row">
+            <div class="logo font-bold text-2xl">
+                Cosme
+            </div>
+            <div class="searchInput">
+                <input type="text" class="w-[300px] h-[40px] border rounded-md border-gray-300 bg-transparent outline-none p-4" placeholder="Search for...">
+            </div>
+            <div class="miniFeatures flex items-center gap-6">
+                <div class="filterCategory">Category</div>
+                <p>Blog</p>
+                <p>shopping card</p>
+                <p>Save</p>
+                <button class="px-3 py-2 bg-[#fd7200] rounded-lg">Login</button>
+            </div>
+        </nav>
+        <div class="cards flex items-center justify-center gap-12 mt-16  mx-[200px]">
+            <div class="left">
+                <div class="card w-[700px] h-[410px] bg-gray-400 rounded-lg">
+
+                </div>
+            </div>
+            <div class="right flex flex-col gap-2">
+                <div class="cardOne w-[200px] h-[200px] bg-gray-400 rounded-lg"></div>
+                <div class="cardTwo w-[200px] h-[200px] bg-gray-400 rounded-lg"></div>
+            </div>
+        </div>
+
+        <div class="flex justify-center mt-12 space-x-8 py-8">
+
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-gray-100 flex items-center justify-center rounded-lg">
+                <i class="fas fa-truck text-lg text-gray-600"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-gray-800">Free Shipping</h3>
+                <p class="text-sm text-gray-500">From all orders over $100</p>
+              </div>
+            </div>
+
+
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-gray-100 flex items-center justify-center rounded-lg">
+                <i class="fas fa-lock text-lg text-gray-600"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-gray-800">Secure Payments</h3>
+                <p class="text-sm text-gray-500">With 5+ payment options</p>
+              </div>
+            </div>
+
+
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-gray-100 flex items-center justify-center rounded-lg">
+                <i class="fas fa-undo text-lg text-gray-600"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-gray-800">30 Days Free Return</h3>
+                <p class="text-sm text-gray-500">No questions asked</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h1 class="font-bold text-gray-800 text-3xl text-lg">Latest Arrival</h1>
+            <br><br>
+            <div class="text-left">
+                <div class="inline-flex items-center space-x-2">
+                  <span>Browse All Products</span>
+                  <span>→</span>
+                </div>
+                <div class="w-full h-[1px] bg-black mt-1"></div>
+              </div>
+            </div>
+    </div>
+</body>
+</html>

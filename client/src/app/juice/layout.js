@@ -15,6 +15,7 @@ export default async function DashboardLayout({
         <h3 className="font-bold text-yellow-400">JUICE SHOP</h3>
         <Link href='/' className="hover:text-red-500">Home</Link>
         <Link href='/juice' className="hover:text-red-500">Juice Shop</Link>
+        <Link href='/sweet' className="hover:text-red-500">Sweet Shop</Link>
         {session ? (
           <LogoutButton />
         ) : (

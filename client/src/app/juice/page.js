@@ -19,9 +19,8 @@ export default async function Page() {
   let jsonData = await data.json();
   let results = await jsonData.result;
   const userInfo = await session.user.user;
-  console.log("data-"+JSON.stringify(results));
-  console.log("session-"+JSON.stringify(session));
-  console.log("session.user.name-"+session.user.user.name);
+
+
   return (
     <>
         <h4 className="text-3xl mt-2 mx-4 font-bold">Welcome to Juice Store, {userInfo.name} !</h4>
